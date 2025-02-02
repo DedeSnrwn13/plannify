@@ -1,5 +1,5 @@
-import { PRIORITY } from "@/lib/utils";
-import { Badge } from "@Components/ui/badge";
+import { PRIORITY } from '@/lib/utils';
+import { Badge } from '@Components/ui/badge';
 
 export function GetPriorityBadge({ priority }) {
     const { URGENT, HIGH, MEDIUM, LOW, UNKNOWN } = PRIORITY;
@@ -31,5 +31,4 @@ export function GetPriorityBadge({ priority }) {
     }
 
     return <Badge className={badge}>{text}</Badge>;
-
 }
