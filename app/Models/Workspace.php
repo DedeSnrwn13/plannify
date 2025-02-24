@@ -41,6 +41,6 @@ class Workspace extends Model
 
     public function members(): MorphMany
     {
-        return $this->morphMany(related: Member::class, 'memberable');
+        return $this->morphMany(Member::class, 'memberable');
     }
 }
