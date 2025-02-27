@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\UsersSingleResource;
+use App\Http\Resources\WorkspaceSidebarResource;
+use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -43,7 +45,10 @@ class HandleInertiaRequests extends Middleware
             'flash_message' => fn() => [
                 'type' => $request->session()->get('type'),
                 'message' => $request->session()->get('message'),
-            ]
+            ],
+            'workspaces' => fn() => $request->user() ? WorkspaceSidebarResource::collection(
+                Workspace::query()->where('user_id', $request->user()->id)->get()
+            ) : null,
         ];
     }
 }
