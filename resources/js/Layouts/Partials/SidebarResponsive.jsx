@@ -110,12 +110,26 @@ export default function SidebarResponsive({ auth, url, workspaces }) {
                                 <li key={index}>
                                     <Link
                                         href={route('workspaces.show', [workspace])}
-                                        className="group flex w-full items-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed text-foreground hover:bg-gray-100"
+                                        className={cn(
+                                            route().current('workspaces.show', [workspace.memberable.slug]) ||
+                                                route().current()
+                                                ? 'bg-red-500 text-white'
+                                                : 'text-foreground hover:bg-gray-100',
+                                            'group flex w-full items-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
+                                        )}
                                     >
-                                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-foreground bg-white text-[0.625rem] font-medium text-foreground">
-                                            {workspace.name.substring(0, 1)}
+                                        <span
+                                            className={cn(
+                                                route().current('workspaces.show', [workspace.memberable.slug]) ||
+                                                    route().current()
+                                                    ? 'border-red-600 text-red-600'
+                                                    : 'border-foreground text-foreground',
+                                                'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
+                                            )}
+                                        >
+                                            {workspace.memberable.name.substring(0, 1)}
                                         </span>
-                                        <span className="truncate">{workspace.name}</span>
+                                        <span className="truncate">{workspace.memberable.name}</span>
                                     </Link>
                                 </li>
                             ))}

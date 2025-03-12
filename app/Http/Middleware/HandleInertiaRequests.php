@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\UsersSingleResource;
 use App\Http\Resources\WorkspaceSidebarResource;
+use App\Models\Member;
 use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -38,16 +39,15 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => fn() => $request->user() ? new UsersSingleResource($request->user()) : null,
             ],
-            'ziggy' => fn() => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
-            ],
             'flash_message' => fn() => [
                 'type' => $request->session()->get('type'),
                 'message' => $request->session()->get('message'),
             ],
             'workspaces' => fn() => $request->user() ? WorkspaceSidebarResource::collection(
-                Workspace::query()->where('user_id', $request->user()->id)->get()
+                Member::query()
+                    ->where('user_id', $request->user()->id)
+                    ->whereHasMorph('memberable', Workspace::class)
+                    ->get()
             ) : null,
         ];
     }

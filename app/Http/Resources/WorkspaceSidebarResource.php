@@ -16,6 +16,12 @@ class WorkspaceSidebarResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'memberable' => [
+                'id' => $this->memberable->id,
+                'name' => $this->memberable->name,
+                'slug' => $this->memberable->slug,
+                'created_at' => $this->memberable->created_at->format('d M Y')
+            ],
             'name' =>  $this->name,
             'slug' => $this->slug,
         ];
