@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Inertia\Response;
+use App\Traits\HasFile;
+use App\Models\Workspace;
+use Illuminate\Http\Request;
 use App\Enums\WorkspaceVisibility;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\WorkspaceRequest;
 use App\Http\Resources\WorkspaceResource;
-use App\Models\Workspace;
-use App\Traits\HasFile;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Inertia\Response;
 
 class WorkspaceController extends Controller
 {
@@ -36,6 +37,11 @@ class WorkspaceController extends Controller
             'cover' => $this->upload_file($request, 'cover', 'workspaces/cover'),
             'logo' => $this->upload_file($request, 'logo', 'workspaces/logo'),
             'visibility' => $request->visibility
+        ]);
+
+        $workspace->members()->create([
+            'user_id' => request()->user()->id,
+            'role' => $workspace->user_id == $request->user()->id ? 'Owner' : 'Member',
         ]);
 
         flashMessage('Workspace information saved successfully');
@@ -77,5 +83,35 @@ class WorkspaceController extends Controller
         flashMessage('Successfully updated workspace');
 
         return to_route('workspaces.show', $workspace);
+    }
+
+    public function member_store(Workspace $workspace, Request $request): RedirectResponse
+    {
+        $request->validate([
+            'email' => [
+                'required',
+                'email',
+                'string'
+            ]
+        ]);
+
+        $user = User::query()->where('email', $request->email)->first();
+        if (!$user) {
+            flashMessage('Unregistered user.', 'error');
+            return back();
+        }
+
+        if ($workspace->members()->where('user_id', $user->id)->exists()) {
+            flashMessage('User is already a member of this workspace', 'error');
+            return back();
+        }
+
+        $workspace->members()->create([
+            'user_id' => $user->id,
+            'role' => 'Member',
+        ]);
+
+        flashMessage('Member successfully invited');
+        return back();
     }
 }

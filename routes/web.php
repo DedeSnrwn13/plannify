@@ -27,6 +27,11 @@ Route::prefix('workspaces')->controller(WorkspaceController::class)->name('works
     Route::get('edit/{workspace:slug}', 'edit')->name('edit');
     Route::put('edit/{workspace:slug}', 'update')->name('update');
     Route::delete('destroy/{workspace:slug}', 'destroy')->name('destroy');
+
+    Route::prefix('member')->name('member.')->group(function () {
+        Route::post('{workspace:slug}/store', 'member_store')->name('store');
+        Route::delete('{workspace:slug}/destroy', 'member_store')->name('destroy');
+    });
 });
 
 Route::middleware('auth')->group(function () {
