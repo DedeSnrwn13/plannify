@@ -11,6 +11,7 @@ use App\Enums\WorkspaceVisibility;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\WorkspaceRequest;
 use App\Http\Resources\WorkspaceResource;
+use App\Models\Member;
 
 class WorkspaceController extends Controller
 {
@@ -112,6 +113,15 @@ class WorkspaceController extends Controller
         ]);
 
         flashMessage('Member successfully invited');
+        return back();
+    }
+
+    public function member_destroy(Workspace $workspace, Member $member): RedirectResponse
+    {
+        $member->delete();
+
+        flashMessage('Member successfully deleted');
+
         return back();
     }
 }

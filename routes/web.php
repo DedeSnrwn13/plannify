@@ -30,7 +30,7 @@ Route::prefix('workspaces')->controller(WorkspaceController::class)->name('works
 
     Route::prefix('member')->name('member.')->group(function () {
         Route::post('{workspace:slug}/store', 'member_store')->name('store');
-        Route::delete('{workspace:slug}/destroy', 'member_store')->name('destroy');
+        Route::delete('{workspace}/destroy/{member}', 'member_destroy')->name('destroy');
     });
 });
 
