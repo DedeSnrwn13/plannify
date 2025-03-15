@@ -31,12 +31,12 @@ class Workspace extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(related: User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function cards(): HasMany
     {
-        return $this->hasMany(related: Card::class);
+        return $this->hasMany(Card::class);
     }
 
     public function members(): MorphMany

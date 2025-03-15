@@ -66,11 +66,11 @@ class User extends Authenticatable
 
     public function attachments(): HasMany
     {
-        return $this->hasMany(related: Attachment::class);
+        return $this->hasMany(Attachment::class);
     }
 
     public function tasks(): HasMany
     {
-        return $this->hasMany(related: Task::class);
+        return $this->hasMany(Task::class);
     }
 }

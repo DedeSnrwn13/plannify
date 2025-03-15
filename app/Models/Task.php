@@ -23,21 +23,21 @@ class Task extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(related: User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function card(): BelongsTo
     {
-        return $this->belongsTo(related: Card::class);
+        return $this->belongsTo(Card::class);
     }
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(related: Task::class, 'parent_id');
+        return $this->belongsTo(Task::class, 'parent_id');
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(related: Task::class, 'parent_id');
+        return $this->hasMany(Task::class, 'parent_id');
     }
 }
