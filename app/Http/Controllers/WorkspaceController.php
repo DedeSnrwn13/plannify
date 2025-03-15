@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Inertia\Response;
+use App\Models\Member;
 use App\Traits\HasFile;
+use App\Enums\CardStatus;
 use App\Models\Workspace;
 use Illuminate\Http\Request;
 use App\Enums\WorkspaceVisibility;
+use App\Http\Resources\CardResource;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\WorkspaceRequest;
 use App\Http\Resources\WorkspaceResource;
-use App\Models\Member;
 
 class WorkspaceController extends Controller
 {
@@ -53,7 +55,18 @@ class WorkspaceController extends Controller
     public function show(Workspace $workspace): Response
     {
         return inertia(component: 'Workspaces/Show', props: [
-            'workspace' => fn() => new WorkspaceResource($workspace)
+            'cards' => fn() =>  CardResource::collection($workspace->load([
+                'cards' => fn($q) => $q->withCount(['tasks', 'members', 'attachments'])->with([
+                    'attachments',
+                    'members',
+                    'tasks' => fn($task) => $task->withCount('children')
+                ])->orderBy('order'),
+            ])->cards),
+            'workspace' => fn() => new WorkspaceResource($workspace),
+            'page_settings' => [
+                'title' => $workspace->name,
+            ],
+            'statuses' => fn() => CardStatus::options(),
         ]);
     }
 
