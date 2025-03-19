@@ -1,8 +1,14 @@
 import { GetPriorityBadge } from '@/Components/GetPriorityBadge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/Components/ui/dropdown-menu';
 import AppLayout from '@/Layouts/AppLayout';
 import { Link } from '@inertiajs/react';
-import { PiPlus } from 'react-icons/pi';
+import { PiDotsThreeOutlineFill, PiPlus } from 'react-icons/pi';
 
 export default function Show({ ...props }) {
     const workspace = props.workspace;
@@ -86,6 +92,19 @@ export default function Show({ ...props }) {
                                                             {card.title}
                                                         </Link>
                                                     </CardTitle>
+
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger>
+                                                            <PiDotsThreeOutlineFill classname="size-4" />
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent align="end" className="w-48">
+                                                            <DropdownMenuItem asChild>
+                                                                <Link href={route('cards.edit', [workspace, card])}>
+                                                                    Edit
+                                                                </Link>
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
                                                 </div>
                                                 <div>
                                                     <GetPriorityBadge priority={card.priority} />
