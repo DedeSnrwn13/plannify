@@ -14,7 +14,7 @@ export const STATUS = {
 };
 
 export const PRIORITY = {
-    URGERNT: 'Urgent',
+    URGENT: 'Urgent',
     HIGH: 'High',
     MEDIUM: 'Medium',
     LOW: 'Low',

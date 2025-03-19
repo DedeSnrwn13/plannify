@@ -3,7 +3,6 @@ import { PRIORITY } from '@/lib/utils';
 
 export function GetPriorityBadge({ priority }) {
     const { URGENT, HIGH, MEDIUM, LOW, UNKNOWN } = PRIORITY;
-
     let badge, text;
 
     switch (priority) {
