@@ -1,8 +1,8 @@
-import { PRIORITY } from '@/lib/utils';
-import { Badge } from '@Components/ui/badge';
+import { STATUS } from '@/lib/utils';
+import { Badge } from './ui/badge';
 
 export function GetStatusBadge({ status }) {
-    const { TODO, INPROGRESS, ONREVIEW, DONE, UNKNOWN } = PRIORITY;
+    const { TODO, INPROGRESS, ONREVIEW, DONE, UNKNOWN } = STATUS;
 
     let badge, text;
 
