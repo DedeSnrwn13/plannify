@@ -1,5 +1,8 @@
+import { flashMessage } from '@/lib/utils';
 import { Button } from '@headlessui/react';
+import { router } from '@inertiajs/react';
 import { PiSquaresFour } from 'react-icons/pi';
+import { toast } from 'sonner';
 
 export default function TaskListCard({ tasks }) {
     return (
@@ -20,7 +23,22 @@ export default function TaskListCard({ tasks }) {
                                 <Button
                                     variant="link"
                                     className="font-medium text-red-500 hover:text-red-600 hover:no-underline"
-                                    onClick={() => console.log('delete task')}
+                                    onClick={() =>
+                                        router.delete(
+                                            route('tasks.destroy', {
+                                                card: task.card_id,
+                                                task: task.id,
+                                            }),
+                                            {
+                                                preserveScroll: true,
+                                                preserveState: true,
+                                                onSuccess: (success) => {
+                                                    const flash = flashMessage(success);
+                                                    if (flash) toast[flash.type](flash.message);
+                                                },
+                                            },
+                                        )
+                                    }
                                 >
                                     Delete
                                 </Button>
