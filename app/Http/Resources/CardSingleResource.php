@@ -22,7 +22,7 @@ class CardSingleResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'deadline' => [
-                'format' => Carbon::createFromFormat('Y-m-d', $this->deadline)->format('d M Y'),
+                'format' => $this->deadline ?  Carbon::createFromFormat('Y-m-d', $this->deadline)->format('d M Y') : null,
                 'unformatted' => $this->deadline,
             ],
             'status' => $this->status->value,

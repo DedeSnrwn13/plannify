@@ -24,7 +24,7 @@ class CardResource extends JsonResource
             'status' => $this->status,
             'priority' => $this->priority,
             'created_at' => $this->created_at->format('d M Y'),
-            'deadline' => (int) Carbon::now()->diffInDays(Carbon::createFromFormat(' Y-m-d', $this->deadline)),
+            'deadline' => $this->deadline ? (int) Carbon::now()->diffInDays(Carbon::createFromFormat('Y-m-d', $this->deadline)) : null,
         ];
     }
 }

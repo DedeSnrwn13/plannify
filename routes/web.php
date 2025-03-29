@@ -7,6 +7,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WorkspaceController;
+use App\Http\Controllers\MemberCardController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -49,6 +50,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('edit/{card}', 'update')->name('update');
         Route::post('{card}/reorder', 'reorder')->name('reorder');
         Route::delete('destroy/{card}', 'destroy')->name('destroy');
+    });
+
+    // Member Card
+    Route::prefix('card/member')->controller(MemberCardController::class)->name('member_card.')->group(function () {
+        Route::post('{card}/store', 'member_store')->name('store');
     });
 });
 
