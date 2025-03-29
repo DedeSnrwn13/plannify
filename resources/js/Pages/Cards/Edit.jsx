@@ -14,9 +14,9 @@ export default function Edit({ card, page_settings, statuses, priorities, worksp
                 </div>
 
                 <div className="grid grid-cols-1 gap-x-4 gap-y-8 pt-10 md:grid-cols-3">
-                    <HeaderForm title="members" subtitle="Please add members to the card" />
+                    <HeaderForm title="Members" subtitle="Please add members to the card" />
 
-                    <MemberCard action={route('member_card.store', { card: card })} />
+                    <MemberCard action={route('member_card.store', { card: card })} members={card.members} />
                 </div>
             </div>
         </>
