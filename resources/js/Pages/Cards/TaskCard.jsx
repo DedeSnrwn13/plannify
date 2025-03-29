@@ -7,8 +7,9 @@ import { flashMessage } from '@/lib/utils';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { toast } from 'sonner';
+import TaskListCard from './TaskListCard';
 
-export default function TaskCard({ action }) {
+export default function TaskCard({ action, tasks }) {
     const { data, setData, processing, errors, reset, post, recentlySuccessful } = useForm({
         title: '',
     });
@@ -68,6 +69,8 @@ export default function TaskCard({ action }) {
                         </Transition>
                     </div>
                 </form>
+
+                <TaskListCard tasks={tasks} />
             </CardContent>
         </Card>
     );
