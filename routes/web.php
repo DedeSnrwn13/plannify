@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     // Attachment
     Route::prefix('cards/attachment')->controller(AttachmentController::class)->name('attachments.')->group(function () {
         Route::post('{card}/create', 'store')->name('store');
+        Route::delete('{card}/destroy/{attachment}', 'destroy')->name('destroy');
     });
 });
 
