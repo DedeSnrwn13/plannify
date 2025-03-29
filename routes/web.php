@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WorkspaceController;
@@ -63,6 +64,11 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('cards/attachment')->controller(AttachmentController::class)->name('attachments.')->group(function () {
         Route::post('{card}/create', 'store')->name('store');
         Route::delete('{card}/destroy/{attachment}', 'destroy')->name('destroy');
+    });
+
+    // Task
+    Route::prefix('cards/tasks')->controller(TaskController::class)->name('tasks.')->group(function () {
+        Route::post('{card}/create', 'store')->name('store');
     });
 });
 
