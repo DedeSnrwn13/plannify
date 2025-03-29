@@ -7,6 +7,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WorkspaceController;
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\MemberCardController;
 
 Route::get('/', function () {
@@ -53,9 +54,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Member Card
-    Route::prefix('card/member')->controller(MemberCardController::class)->name('member_card.')->group(function () {
-        Route::post('{card}/store', 'store')->name('store');
+    Route::prefix('cards/member')->controller(MemberCardController::class)->name('member_card.')->group(function () {
+        Route::post('{card}/create', 'store')->name('store');
         Route::delete('{card}/destroy/{member}', 'destroy')->name('destroy');
+    });
+
+    // Attachment
+    Route::prefix('cards/attachment')->controller(AttachmentController::class)->name('attachments.')->group(function () {
+        Route::post('{card}/create', 'store')->name('store');
     });
 });
 
