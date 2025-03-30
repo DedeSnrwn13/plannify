@@ -71,7 +71,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('{card}/create', 'store')->name('store');
         Route::delete('{card}/destroy/{task}', 'destroy')->name('destroy');
 
-        Route::post('{card}/{task}}/item', 'item')->name('item');
+        Route::post('{card}/{task}/item', 'item')->name('item');
+        Route::put('{card}/{task}/completed', 'completed')->name('completed');
     });
 });
 
