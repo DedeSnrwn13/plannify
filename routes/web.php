@@ -70,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('cards/tasks')->controller(TaskController::class)->name('tasks.')->group(function () {
         Route::post('{card}/create', 'store')->name('store');
         Route::delete('{card}/destroy/{task}', 'destroy')->name('destroy');
+
+        Route::post('{card}/{task}}/item', 'item')->name('item');
     });
 });
 
