@@ -85,6 +85,8 @@ export default function TaskListCard({ tasks }) {
                                     </div>
                                 </div>
 
+                                {/* <Progress className="mb-4 h-2.5" value={task.percentage} /> */}
+
                                 <TaskListChildrenCard children={task.children} />
 
                                 {showFormItem[task.id] || task.children.length > 0 ? (

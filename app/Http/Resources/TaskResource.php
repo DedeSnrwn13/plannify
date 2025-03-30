@@ -22,6 +22,9 @@ class TaskResource extends JsonResource
             'is_completed' => $this->is_completed,
             'parent_id' => $this->parent_id,
             'children' => self::collection($this->children),
+            'percentage' => $this->children->count() > 0
+                ? ($this->children->where('is_completed', true)->count() / $this->children->count()) * 100
+                : 0,
         ];
     }
 }

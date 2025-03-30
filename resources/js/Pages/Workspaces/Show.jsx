@@ -1,6 +1,6 @@
 import { ActionDialog } from '@/Components/ActionDialog';
 import { GetPriorityBadge } from '@/Components/GetPriorityBadge';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, router } from '@inertiajs/react';
-import { PiDotsThreeOutlineFill, PiPlus } from 'react-icons/pi';
+import { PiCheckSquare, PiDotsThreeOutlineFill, PiLinkSimple, PiPlus, PiUser } from 'react-icons/pi';
 import { toast } from 'sonner';
 
 export default function Show({ ...props }) {
@@ -148,6 +148,62 @@ export default function Show({ ...props }) {
                                                     </CardDescription>
                                                 </div>
                                             </CardHeader>
+                                            <CardContent>
+                                                <div className="flex flex-col space-y-8">
+                                                    {card.has_task && (
+                                                        <div>
+                                                            <div className="-mb-1.5 flex items-center justify-between">
+                                                                <p className="text-sm leading-relaxed tracking-tighter text-muted-foreground">
+                                                                    <span className="font-medium text-red-500">
+                                                                        {card.percentage}
+                                                                    </span>{' '}
+                                                                    of 100
+                                                                </p>
+                                                                <p className="text-sm leading-relaxed tracking-tighter text-muted-foreground">
+                                                                    {card.deadline > 0 ? (
+                                                                        <span>{card.deadline} days left</span>
+                                                                    ) : card.deadline == 0 ? (
+                                                                        <span className="text-yellow-500">
+                                                                            Today is deadline
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span className="text-red-500">Overdue</span>
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    <div className="flex items-center justify-between gap-x-4">
+                                                        {card.has_task && (
+                                                            <div className="flex items-center gap-x-1">
+                                                                <PiCheckSquare className="h-4 w-4 text-muted-foreground" />
+                                                                <span className="text-sm leading-relaxed tracking-tighter text-muted-foreground">
+                                                                    {card.tasks_count} Tasks
+                                                                </span>
+                                                            </div>
+                                                        )}
+
+                                                        {card.members_count > 1 && (
+                                                            <div className="flex items-center gap-x-1">
+                                                                <PiUser className="h-4 w-4 text-muted-foreground" />
+                                                                <span className="text-sm leading-relaxed tracking-tighter text-muted-foreground">
+                                                                    {card.members_count} Members
+                                                                </span>
+                                                            </div>
+                                                        )}
+
+                                                        {card.has_attachment && (
+                                                            <div className="flex items-center gap-x-1">
+                                                                <PiLinkSimple className="h-4 w-4 text-muted-foreground" />
+                                                                <span className="text-sm leading-relaxed tracking-tighter text-muted-foreground">
+                                                                    {card.attachments_count} Files
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </CardContent>
                                         </Card>
                                     ))}
                             </div>
