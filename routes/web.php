@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WorkspaceController;
@@ -74,6 +75,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('{card}/{task}/item', 'item')->name('item');
         Route::put('{card}/{task}/completed', 'completed')->name('completed');
     });
+
+    // My Task
+    Route::get('my-tasks', MyTaskController::class)->name('mytasks.index');
 });
 
 require __DIR__ . '/auth.php';
