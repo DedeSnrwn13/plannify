@@ -18,6 +18,11 @@ class MyTaskController extends Controller
         $tasks = Member::query()
             ->where('members.user_id', $request->user()->id)
             ->whereHasMorph('memberable', Card::class)
+            ->when($request->search, function ($query, $value) {
+                return $query->whereHasMorph('memberable', Card::class, function ($subQuery) use ($value) {
+                    $subQuery->where('title', 'REGEXP', $value);
+                });
+            })
             ->paginate(10);
 
         return inertia('Tasks/Index', [
@@ -29,6 +34,10 @@ class MyTaskController extends Controller
             'page_settings' => [
                 'title' => 'Tasks',
                 'subtitle' => 'A list of all the task in your platform',
+            ],
+            'state' => [
+                'page' => $request->page ?? 1,
+                'search' => $request->search ?? '',
             ],
         ]);
     }

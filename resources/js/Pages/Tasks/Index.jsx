@@ -8,16 +8,37 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
+import { Input } from '@/Components/ui/input';
+import UseFilter from '@/Hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
 import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import { PiArrowLeft, PiArrowRight, PiArrowsDownUp, PiDotsThreeOutlineVerticalFill } from 'react-icons/pi';
 
 export default function Index({ page_settings, ...props }) {
     const { data: tasks, meta, links } = props.tasks;
+    const [params, setParams] = useState(props.state);
+
+    UseFilter({
+        route: route('mytasks.index'),
+        values: params,
+        only: ['tasks'],
+    });
 
     return (
         <>
             <Header title={page_settings.title} subtitle={page_settings.subtitle} />
+
+            <div className="my-4 flex flex-col justify-between space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                <div className="flex w-full flex-col gap-4 sm:flex-row">
+                    <Input
+                        className="w-full sm:w-1/4"
+                        placeholder="Search..."
+                        value={params?.search}
+                        onChange={(e) => setParams((prev) => ({ ...prev, search: e.target.value }))}
+                    />
+                </div>
+            </div>
 
             <Card>
                 <CardContent>
