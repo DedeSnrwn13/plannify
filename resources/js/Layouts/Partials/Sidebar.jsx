@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from '@/Components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import { PiHouse, PiLockKeyOpen, PiPlus, PiSquaresFour, PiUser } from 'react-icons/pi';
@@ -131,11 +131,12 @@ export default function Sidebar({ auth, url, workspaces }) {
                 <li className="-mx-6 mt-auto">
                     {/* profile */}
                     <Link
-                        href="#"
+                        href={route('profile.edit')}
                         className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-relaxed text-foreground hover:bg-gray-100"
                     >
                         <Avatar>
-                            <AvatarFallback>X</AvatarFallback>
+                            <AvatarImage src={auth.avatar} />
+                            <AvatarFallback>{auth.name.substring(0, 1)}</AvatarFallback>
                         </Avatar>
                         <span>{auth.name}</span>
                     </Link>
