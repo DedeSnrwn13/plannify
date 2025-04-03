@@ -20,6 +20,14 @@ export default function Index({ page_settings, ...props }) {
     const { data: tasks, meta, links } = props.tasks;
     const [params, setParams] = useState(props.state);
 
+    const onSortable = (field) => {
+        setParams({
+            ...params,
+            field: field,
+            direction: params.direction === 'asc' ? 'desc' : 'asc',
+        });
+    };
+
     UseFilter({
         route: route('mytasks.index'),
         values: params,
@@ -65,7 +73,11 @@ export default function Index({ page_settings, ...props }) {
                                                 className="px-2 py-3.5 text-left text-sm font-semibold text-foreground"
                                                 scope="col"
                                             >
-                                                <Button variant="ghost" className="group inline-flex">
+                                                <Button
+                                                    variant="ghost"
+                                                    className="group inline-flex"
+                                                    onClick={() => onSortable('title')}
+                                                >
                                                     Title
                                                     <span className="ml-2 flex-none rounded text-foreground">
                                                         <PiArrowsDownUp className="h-5 w-5" />
@@ -76,7 +88,11 @@ export default function Index({ page_settings, ...props }) {
                                                 className="px-2 py-3.5 text-left text-sm font-semibold text-foreground"
                                                 scope="col"
                                             >
-                                                <Button variant="ghost" className="group inline-flex">
+                                                <Button
+                                                    variant="ghost"
+                                                    className="group inline-flex"
+                                                    onClick={() => onSortable('status')}
+                                                >
                                                     Status
                                                     <span className="ml-2 flex-none rounded text-foreground">
                                                         <PiArrowsDownUp className="h-5 w-5" />
@@ -87,7 +103,11 @@ export default function Index({ page_settings, ...props }) {
                                                 className="px-2 py-3.5 text-left text-sm font-semibold text-foreground"
                                                 scope="col"
                                             >
-                                                <Button variant="ghost" className="group inline-flex">
+                                                <Button
+                                                    variant="ghost"
+                                                    className="group inline-flex"
+                                                    onClick={() => onSortable('created_at')}
+                                                >
                                                     Created At
                                                     <span className="ml-2 flex-none rounded text-foreground">
                                                         <PiArrowsDownUp className="h-5 w-5" />
