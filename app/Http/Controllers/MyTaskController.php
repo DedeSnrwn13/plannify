@@ -23,7 +23,7 @@ class MyTaskController extends Controller
                     $subQuery->where('title', 'REGEXP', $value);
                 });
             })
-            ->paginate(10);
+            ->paginate($request->load ?? 10);
 
         return inertia('Tasks/Index', [
             'tasks' => fn() => MyTaskResource::collection($tasks)->additional([
@@ -38,6 +38,7 @@ class MyTaskController extends Controller
             'state' => [
                 'page' => $request->page ?? 1,
                 'search' => $request->search ?? '',
+                'load' => 10,
             ],
         ]);
     }

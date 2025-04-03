@@ -9,6 +9,7 @@ import {
     DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
 import { Input } from '@/Components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 import UseFilter from '@/Hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
 import { Link } from '@inertiajs/react';
@@ -37,6 +38,18 @@ export default function Index({ page_settings, ...props }) {
                         value={params?.search}
                         onChange={(e) => setParams((prev) => ({ ...prev, search: e.target.value }))}
                     />
+                    <Select value={params?.load} onValueChange={(e) => setParams({ ...params, load: e })}>
+                        <SelectTrigger className="w-full sm:w-24">
+                            <SelectValue placeholder="Load" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {[2, 3, 10, 25, 20, 75, 100].map((number, index) => (
+                                <SelectItem key={index} value={number}>
+                                    {number}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 </div>
             </div>
 
