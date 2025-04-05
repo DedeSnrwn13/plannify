@@ -7,6 +7,7 @@ use App\Models\User;
 use Inertia\Response;
 use App\Models\Member;
 use App\Enums\CardStatus;
+use App\Http\Resources\MyTaskResource;
 use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,11 +16,23 @@ class DashboardController extends Controller
 {
     public function index(): Response
     {
+        $tasks = Member::query()
+            ->where('members.user_id', request()->user()->id)
+            ->whereHasMorph(
+                'memberable',
+                Card::class,
+                fn($query) => $query->where('status', CardStatus::TODO->value),
+            )
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return inertia('Dashboard', [
             'page_settings' => [
                 'title' => 'Dashboard',
                 'subtitle' => 'You can see a summary of the information here',
             ],
+            'tasks' => MyTaskResource::collection($tasks),
             'productivity_chart' => $this->productivityChart(),
             'count' => [
                 'users' => fn() => User::count(),
