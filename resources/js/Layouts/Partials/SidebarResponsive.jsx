@@ -36,7 +36,7 @@ export default function SidebarResponsive({ auth, url, workspaces }) {
                             </li>
                             <li>
                                 <Link
-                                    href="#"
+                                    href={route('users.index')}
                                     className={cn(
                                         url.startsWith('/users')
                                             ? 'bg-red-500 text-white'
@@ -109,7 +109,7 @@ export default function SidebarResponsive({ auth, url, workspaces }) {
                             {workspaces.map((workspace, index) => (
                                 <li key={index}>
                                     <Link
-                                        href={route('workspaces.show', [workspace])}
+                                        href={route('workspaces.show', [workspace.memberable.slug])}
                                         className={cn(
                                             route().current('workspaces.show', [workspace.memberable.slug]) ||
                                                 route().current()

@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WorkspaceController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\MemberCardController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -78,6 +79,16 @@ Route::middleware(['auth'])->group(function () {
 
     // My Task
     Route::get('my-tasks', MyTaskController::class)->name('mytasks.index');
+
+    // Users
+    Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('create', action: 'store')->name('store');
+        Route::get('edit/{workspace:slug}', 'edit')->name('edit');
+        Route::put('edit/{workspace:slug}', 'update')->name('update');
+        Route::delete('destroy/{workspace:slug}', 'destroy')->name('destroy');
+    });
 });
 
 require __DIR__ . '/auth.php';
