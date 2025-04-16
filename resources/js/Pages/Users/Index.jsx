@@ -14,7 +14,8 @@ import { Input } from '@/Components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 import UseFilter from '@/Hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
-import { Link } from '@inertiajs/react';
+import { flashMessage } from '@/lib/utils';
+import { Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import {
     PiArrowLeft,
@@ -23,6 +24,7 @@ import {
     PiArrowsDownUp,
     PiDotsThreeOutlineVerticalFill,
 } from 'react-icons/pi';
+import { toast } from 'sonner';
 
 export default function Index({ page_settings, ...props }) {
     const { data: users, meta, links } = props.users;
@@ -200,7 +202,23 @@ export default function Index({ page_settings, ...props }) {
                                                                         }
                                                                         title="Delete People"
                                                                         description="Are you sure you want to delete this people?"
-                                                                        action={() => console.log('delete people')}
+                                                                        action={() =>
+                                                                            router.delete(
+                                                                                route('users.destroy', [user]),
+                                                                                {
+                                                                                    preserveScroll: true,
+                                                                                    preserveState: true,
+                                                                                    onSuccess: (success) => {
+                                                                                        const flash =
+                                                                                            flashMessage(success);
+                                                                                        if (flash)
+                                                                                            toast[flash.type](
+                                                                                                flash.message,
+                                                                                            );
+                                                                                    },
+                                                                                },
+                                                                            )
+                                                                        }
                                                                     />
                                                                 </DropdownMenuGroup>
                                                             </DropdownMenuContent>

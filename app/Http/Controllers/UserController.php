@@ -102,4 +102,14 @@ class UserController extends Controller
 
         return to_route('users.index');
     }
+
+    public function destroy(User $user): RedirectResponse
+    {
+        $this->delete_file($user, 'avatar');
+        $user->delete();
+
+        flashMessage('The user has been successfully deleted');
+
+        return to_route('users.index');
+    }
 }
