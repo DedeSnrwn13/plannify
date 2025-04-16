@@ -84,7 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
-        Route::post('create', action: 'store')->name('store');
+        Route::post('store', 'store')->name('store');
         Route::get('edit/{workspace:slug}', 'edit')->name('edit');
         Route::put('edit/{workspace:slug}', 'update')->name('update');
         Route::delete('destroy/{workspace:slug}', 'destroy')->name('destroy');

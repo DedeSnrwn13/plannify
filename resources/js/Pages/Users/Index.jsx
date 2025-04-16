@@ -71,6 +71,9 @@ export default function Index({ page_settings, ...props }) {
                         Clear
                     </Button>
                 </div>
+                <Button variant="red" asChild>
+                    <Link href={route('users.create')}>Create</Link>
+                </Button>
             </div>
 
             <Card>
