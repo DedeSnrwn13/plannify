@@ -9,11 +9,11 @@ import { flashMessage } from '@/lib/utils';
 import { useForm } from '@inertiajs/react';
 import { toast } from 'sonner';
 
-export default function Create({ page_settings }) {
-    const { data, setData, processing, reset, post, errors } = useForm({
-        name: '',
-        username: '',
-        email: '',
+export default function Edit({ user, page_settings }) {
+    const { data, setData, processing, reset, put, errors } = useForm({
+        name: user.name ?? '',
+        username: user.username ?? '',
+        email: user.email ?? '',
         password: '',
         password_confirmation: '',
         avatar: '',
@@ -22,7 +22,7 @@ export default function Create({ page_settings }) {
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
-        post(page_settings.action, {
+        put(page_settings.action, {
             onSuccess: (success) => {
                 const flash = flashMessage(success);
                 if (flash) toast[flash.type](flash.message);
@@ -98,8 +98,8 @@ export default function Create({ page_settings }) {
                                                 type="password"
                                                 name="password_confirmation"
                                                 id="password_confirmation"
-                                                value={data.password_confirmation}
                                                 onChange={(e) => setData(e.target.name, e.target.value)}
+                                                value={data.password_confirmation}
                                                 onErrors={
                                                     errors.password_confirmation && (
                                                         <InputError message={errors.password_confirmation} />
@@ -138,4 +138,4 @@ export default function Create({ page_settings }) {
     );
 }
 
-Create.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />;
+Edit.layout = (page) => <AppLayout children={page} title={page.props.page_settings.title} />;

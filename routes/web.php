@@ -85,9 +85,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
-        Route::get('edit/{workspace:slug}', 'edit')->name('edit');
-        Route::put('edit/{workspace:slug}', 'update')->name('update');
-        Route::delete('destroy/{workspace:slug}', 'destroy')->name('destroy');
+        Route::get('edit/{user}', 'edit')->name('edit');
+        Route::put('edit/{user}', 'update')->name('update');
+        Route::delete('destroy/{user}', 'destroy')->name('destroy');
     });
 });
 
