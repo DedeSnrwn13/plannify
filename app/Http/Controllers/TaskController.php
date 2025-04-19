@@ -6,11 +6,14 @@ use App\Models\Card;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
     public function store(Card $card, Request $request): RedirectResponse
     {
+        Gate::authorize('task_card', $card);
+
         $request->validate([
             'title' => ['required', 'string', 'max:255']
         ]);
