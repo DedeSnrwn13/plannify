@@ -34,25 +34,27 @@ export default function SidebarResponsive({ auth, url, workspaces }) {
                                     Dashboard
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    href={route('users.index')}
-                                    className={cn(
-                                        url.startsWith('/users')
-                                            ? 'bg-red-500 text-white'
-                                            : 'text-foreground hover:bg-gray-100',
-                                        'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
-                                    )}
-                                >
-                                    <PiUser
+                            {auth.is_admin && (
+                                <li>
+                                    <Link
+                                        href={route('users.index')}
                                         className={cn(
-                                            url.startsWith('/users') ? 'text-white' : 'text-foreground',
-                                            'h-6 w-6 shrink-0',
+                                            url.startsWith('/users')
+                                                ? 'bg-red-500 text-white'
+                                                : 'text-foreground hover:bg-gray-100',
+                                            'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                         )}
-                                    ></PiUser>
-                                    People
-                                </Link>
-                            </li>
+                                    >
+                                        <PiUser
+                                            className={cn(
+                                                url.startsWith('/users') ? 'text-white' : 'text-foreground',
+                                                'h-6 w-6 shrink-0',
+                                            )}
+                                        ></PiUser>
+                                        People
+                                    </Link>
+                                </li>
+                            )}
                             <li>
                                 <Link
                                     href={route('mytasks.index')}

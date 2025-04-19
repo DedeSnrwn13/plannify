@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{user}', 'edit')->name('edit');
         Route::put('edit/{user}', 'update')->name('update');
         Route::delete('destroy/{user}', 'destroy')->name('destroy');
-    });
+    })->middleware('role:admin');
 });
 
 require __DIR__ . '/auth.php';
