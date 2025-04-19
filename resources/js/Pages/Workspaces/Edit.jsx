@@ -98,28 +98,31 @@ export default function Edit({ workspace, page_settings, visibilities }) {
                         </div>
                     </div>
                     <div className="flex items-center justify-between gap-x-2 py-6">
-                        <Button
-                            type="button"
-                            variant="link"
-                            className="font-medium text-red-500 hover:text-red-600 hover:no-underline"
-                            onClick={() =>
-                                router.delete(
-                                    route('workspaces.destroy', {
-                                        workspace: workspace,
-                                    }),
-                                    {
-                                        preserveScroll: true,
-                                        preserveState: true,
-                                        onSuccess: (success) => {
-                                            const flash = flashMessage(success);
-                                            if (toast) toast[flash.type](flash.message);
+                        {workspace.can.delete_workspace && (
+                            <Button
+                                type="button"
+                                variant="link"
+                                className="font-medium text-red-500 hover:text-red-600 hover:no-underline"
+                                onClick={() =>
+                                    router.delete(
+                                        route('workspaces.destroy', {
+                                            workspace: workspace,
+                                        }),
+                                        {
+                                            preserveScroll: true,
+                                            preserveState: true,
+                                            onSuccess: (success) => {
+                                                const flash = flashMessage(success);
+                                                if (toast) toast[flash.type](flash.message);
+                                            },
                                         },
-                                    },
-                                )
-                            }
-                        >
-                            Delete Workspace
-                        </Button>
+                                    )
+                                }
+                            >
+                                Delete Workspace
+                            </Button>
+                        )}
+
                         <div className="flex gap-x-2">
                             <Button type="button" variant="ghost" onClick={() => reset()}>
                                 Reset

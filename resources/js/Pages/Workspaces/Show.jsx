@@ -175,12 +175,14 @@ export default function Show({ ...props }) {
                             >
                                 Create Card
                             </Link>
-                            <Link
-                                href={route('workspaces.edit', [workspace])}
-                                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium text-foreground ring-offset-background transition-colors hover:font-bold hover:text-red-500 hover:no-underline hover:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-                            >
-                                Settings
-                            </Link>
+                            {workspace.can.edit_workspace && (
+                                <Link
+                                    href={route('workspaces.edit', [workspace])}
+                                    className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium text-foreground ring-offset-background transition-colors hover:font-bold hover:text-red-500 hover:no-underline hover:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                                >
+                                    Settings
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
