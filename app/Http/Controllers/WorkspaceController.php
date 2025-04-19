@@ -43,11 +43,6 @@ class WorkspaceController extends Controller
             'visibility' => $request->visibility
         ]);
 
-        $workspace->members()->create([
-            'user_id' => request()->user()->id,
-            'role' => $workspace->user_id == $request->user()->id ? 'Owner' : 'Member',
-        ]);
-
         flashMessage('Workspace information saved successfully');
 
         return to_route('workspaces.show', $workspace);
@@ -109,7 +104,6 @@ class WorkspaceController extends Controller
         $this->delete_file($workspace, 'cover');
         $this->delete_file($workspace, 'logo');
 
-        $workspace->members()->delete();
         $workspace->delete();
 
         flashMessage('The workspace has been successfully deleted');
