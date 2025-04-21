@@ -66,14 +66,14 @@ export default function Dashboard({ page_settings, count, productivity_chart, ta
                             </dl>
                         </div>
 
-                        <div className="mt-8 rounded-lg border bg-white px-4 pb-6 pt-5 sm:px-6 sm:pt-6">
+                        <div className="mt-8 rounded-lg border bg-white px-4 pb-6 pt-5 dark:bg-gray-800 sm:px-6 sm:pt-6">
                             <Bar options={options} data={data} />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <aside className="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 lg:px-8 xl:block">
+            <aside className="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 dark:border-gray-800 lg:px-8 xl:block">
                 {/* card */}
                 <Card className="mb-4">
                     <CardContent className="mt-4">

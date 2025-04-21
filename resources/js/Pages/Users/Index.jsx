@@ -85,7 +85,7 @@ export default function Index({ page_settings, ...props }) {
                             <div className="inline-block w-full py-2 align-middle sm:px-2">
                                 <table className="w-full text-left">
                                     <thead>
-                                        <tr className="bg-gray-50">
+                                        <tr className="bg-gray-50 dark:bg-gray-700">
                                             <th
                                                 className="px-2 py-3.5 text-left text-sm font-semibold text-foreground"
                                                 scope="col"

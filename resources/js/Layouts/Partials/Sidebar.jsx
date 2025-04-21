@@ -16,7 +16,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                                 className={cn(
                                     url.startsWith('/dashboard')
                                         ? 'bg-red-500 text-white'
-                                        : 'text-foreground hover:bg-gray-100',
+                                        : 'text-foreground hover:bg-gray-100 dark:hover:bg-red-500',
                                     'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                 )}
                             >
@@ -36,7 +36,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                                     className={cn(
                                         url.startsWith('/users')
                                             ? 'bg-red-500 text-white'
-                                            : 'text-foreground hover:bg-gray-100',
+                                            : 'text-foreground hover:bg-gray-100 dark:hover:bg-red-500',
                                         'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                     )}
                                 >
@@ -56,7 +56,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                                 className={cn(
                                     url.startsWith('/my-tasks')
                                         ? 'bg-red-500 text-white'
-                                        : 'text-foreground hover:bg-gray-100',
+                                        : 'text-foreground hover:bg-gray-100 dark:hover:bg-red-500',
                                     'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                 )}
                             >
@@ -77,7 +77,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                                 className={cn(
                                     url.startsWith('/logout')
                                         ? 'bg-red-500 text-white'
-                                        : 'text-foreground hover:bg-gray-100',
+                                        : 'text-foreground hover:bg-gray-100 dark:hover:bg-red-500',
                                     'group flex w-full gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                 )}
                             >
@@ -110,7 +110,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                                     className={cn(
                                         route().current('workspace.show', [workspace.memberable.slug])
                                             ? 'bg-red-500 text-white'
-                                            : 'text-foreground hover:bg-gray-100',
+                                            : 'text-foreground hover:bg-gray-100 dark:hover:bg-red-500',
                                         'group flex w-full items-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-relaxed',
                                     )}
                                 >
@@ -134,7 +134,7 @@ export default function Sidebar({ auth, url, workspaces }) {
                     {/* profile */}
                     <Link
                         href={route('profile.edit')}
-                        className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-relaxed text-foreground hover:bg-gray-100"
+                        className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-relaxed text-foreground hover:bg-gray-100 dark:hover:bg-red-500"
                     >
                         <Avatar>
                             <AvatarImage src={auth.avatar} />

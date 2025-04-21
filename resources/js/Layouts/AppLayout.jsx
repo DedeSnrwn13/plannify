@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '@/Components/ThemeSwitcher';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Toaster } from '@/Components/ui/sonner';
 import { Dialog, Transition } from '@headlessui/react';
@@ -110,6 +111,9 @@ export default function AppLayout({ children, title }) {
 
                 <main className="py-10 lg:pl-72">
                     <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+                    <div className="fixed bottom-5 end-5 flex w-full justify-center lg:justify-end">
+                        <ThemeSwitcher />
+                    </div>
                 </main>
             </div>
         </>
